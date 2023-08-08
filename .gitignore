@@ -1,0 +1,7 @@
+.vscode
+migrations
+__pycache__
+__init__.py
+env
+.env
+db.sqlite3
