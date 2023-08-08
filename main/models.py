@@ -10,14 +10,14 @@ TYPE=(("Job", "job"),
 
 
 class Profile(models.Model):
-    id= models.ForeignKey(User, on_delete=models.CASCADE, primary_key=True)
+    id= models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
     created= models.DateTimeField(auto_now_add= True)
     about= models.TextField(blank= True)
     karma= models.IntegerField(blank= True, default=1)
     submitted = models.ManyToManyField('Base', related_name='submissions', blank=True)
     
     def __str__(self):
-        return self.id
+        return self.id.username
     
 
 class Base(models.Model):
@@ -34,27 +34,27 @@ class Base(models.Model):
         
 class Job(Base):
     deleted= models.BooleanField(default= False)
-    title= models.CharField(max_length= 255)
+    title= models.CharField(max_length= 255, blank= True)
 
 class Story(Base):
-    descendants= models.IntegerField()
+    descendants= models.IntegerField(default=0, blank= True, null= True)
     score= models.IntegerField(default= 0)
-    title= models.CharField(max_length=255)
-    url= models.URLField()
+    title= models.CharField(max_length=255, blank= True)
+    url= models.URLField(blank= True)
 
 class Comment(Base):
-    parent = models.ForeignKey(Base, on_delete=models.CASCADE)
-    text = models.TextField()
+    parent = models.ForeignKey(Base, on_delete=models.CASCADE, related_name= "base_comment")
+    text = models.TextField(blank= True)
     
 class Poll(Base):
-    descendants = models.IntegerField()
-    score = models.IntegerField()
+    descendants = models.IntegerField(blank= True)
+    score = models.IntegerField(blank= True)
     title = models.CharField(max_length=255)
-    text = models.TextField()
+    text = models.TextField(blank= True)
     
 class PollOption(Base):
     parent = models.ForeignKey(Base, on_delete=models.CASCADE, related_name='options')
-    score = models.IntegerField()
+    score = models.IntegerField(blank= True)
     
     def save(self, *args, **kwargs):
         super().save(*args, **kwargs)
