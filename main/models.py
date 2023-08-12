@@ -41,6 +41,7 @@ class Story(Base):
     score= models.IntegerField(default= 0)
     title= models.CharField(max_length=255, blank= True)
     url= models.URLField(blank= True)
+    
 
 class Comment(Base):
     parent = models.ForeignKey(Base, on_delete=models.CASCADE, related_name= "base_comment")
