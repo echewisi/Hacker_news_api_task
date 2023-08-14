@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Item Detail</title>
+</head>
+<body>
+    <h1>Item Detail</h1>
+    
+    <h2>{{ item.title }}</h2>
+    <p>Author: {{ item.author }}</p>
+    <p>Score: {{ item.score }}</p>
+    <p>URL: <a href="{{ item.url }}">{{ item.url }}</a></p>
+    
+    <h3>Comments</h3>
+    <ul>
+        {% for comment in item.comments.all %}
+            <li>{{ comment.text }} - by {{ comment.author }}</li>
+        {% endfor %}
+    </ul>
+    
+    <a href="{% url 'top_level_items' %}">Back to Top Level Items</a>
+</body>
+</html>

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Top Level Items</title>
+</head>
+<body>
+    <h1>Top Level Items</h1>
+    
+    <ul>
+        {% for item in top_level_items %}
+            <li>
+                <strong>{{ item.title }}</strong> by {{ item.author }} - Score: {{ item.score }}
+                [<a href="{% url 'item_detail' item.id %}">Details</a>]
+                [<a href="{% url 'update_item' item.id %}">Edit</a>]
+                [<a href="{% url 'delete_item' item.id %}">Delete</a>]
+            </li>
+        {% endfor %}
+    </ul>
+    
+    <a href="{% url 'add_item' %}">Add New Item</a>
+</body>
+</html>

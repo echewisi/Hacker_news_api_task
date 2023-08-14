@@ -39,7 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'main',
     'main_api',
-    'rest_framework'
+    'rest_framework',
+    'django_celery_beat'
 ]
 
 MIDDLEWARE = [
@@ -85,7 +86,11 @@ DATABASES = {
 
 #celery configuration
 CELERY_BROKER_URL = 'redis://localhost:6379/0'  
-CELERY_RESULT_BACKEND = 'db+sqlite:///Hacker_news\db.sqlite3'# Password validation
+CELERY_RESULT_BACKEND = 'db+sqlite:///Hacker_news\db.sqlite3'
+
+
+
+# Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
 
 AUTH_PASSWORD_VALIDATORS = [
